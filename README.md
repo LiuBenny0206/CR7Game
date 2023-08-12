@@ -21,6 +21,8 @@ Welcome to the Cristiano Ronaldo Game! This is a fun and interactive web-based g
 
 ## Technologies Used
 
-- Flask: Web framework used for building the game backend.
+- Flask: Serving as the foundation of the application, Flask is a lightweight Python web framework used for creating routes, handling requests, and rendering templates.
 - HTML/CSS: Frontend elements and styling.
 - JavaScript: Used for game logic and interactivity.
+- SQLite: As a lightweight and efficient relational database management system, SQLite is used to securely store user game score data, ensuring data integrity and minimizing resource usage by the application.
+- SQLAlchemy: A powerful Object-Relational Mapping (ORM) library, SQLAlchemy simplifies interactions with the database. It seamlessly translates Python objects into database records, enhancing data manipulation and storage capabilities.
