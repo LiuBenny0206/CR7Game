@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Page</title>
+    <style>
+        body {
+            background-image: url("static/image/GameBackground.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: "Helvetica", sans-serif;
+        }
+        h2 {
+            color: white;
+        }
+        a.logout-link {
+            color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-left: 10px;
+            margin-bottom: 20px;
+            font-size: large;
+            font-family: "Helvetica", sans-serif;
+
+        }
+        .CR7{
+            transform: scale(0.2);
+        }
+        .countdown {
+        color: white;
+        font-size: 500px;
+        font-family: "Helvetica", sans-serif;
+        text-align: center;
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        }
+        .score {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+        }
+        .game-countdown{
+        color: white;
+        font-size: 30px;
+        font-family: "Helvetica", sans-serif;
+        text-align: center;
+        margin-top: 20px;
+        }
+
+    </style>
+    <script>
+        var score = -1;
+
+        function startGame() {
+            var countdownText = document.getElementById('countdown');
+            var img = document.getElementById('CR7');
+            var audio = document.getElementById('siuuu');
+            var count = 3;
+
+            img.style.display = 'none';
+
+            var countdownInterval = setInterval(function() {
+                countdownText.textContent = count;
+                count--;
+
+                if (count < 0) {
+                    clearInterval(countdownInterval);
+                    countdownText.style.display = 'none';
+                    showCristiano(img, audio);
+                }
+            }, 1000);
+        }
+        var gameCountdown = document.getElementById('game-countdown');
+        var timeRemaining = 10;
+
+        function startCountdown() {
+        var countdownInterval = setInterval(function() {
+            var gameCountdown = document.getElementById('game-countdown'); // 获取元素
+            gameCountdown.textContent = 'Time: ' + timeRemaining + 's';
+            timeRemaining--;
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdownInterval);
+                submitScore();
+
+            }
+        }, 1000); //
+    }
+
+        function getRandomPosition() {
+            var xPos = Math.random() * (window.innerWidth - 680);
+            var yPos = Math.random() * (window.innerHeight - 350);
+            console.log('Generated random position:', xPos, yPos);
+            return [xPos, yPos];
+        }
+
+        function showCristiano() {
+            var img = document.getElementById('CR7');
+            var audio = document.getElementById('siuuu');
+            img.style.display = 'block';
+            img.style.visibility = 'visible';
+
+            var position = getRandomPosition();
+            img.style.left = position[0] + 'px';
+            img.style.bottom = position[1] + 'px';
+
+            audio.currentTime = 0;
+            audio.play();
+
+            // 增加得分
+            score++;
+            updateScoreDisplay();
+        }
+        function submitScore() {
+
+            var scoreInput = document.getElementById('score-input');
+            scoreInput.value = score;
+
+
+            setTimeout(function() {
+                var scoreForm = document.getElementById('score-form');
+                scoreForm.submit();
+            }, 1000);
+        }
+
+        function updateScoreDisplay() {
+            var scoreDisplay = document.getElementById('score');
+            scoreDisplay.textContent = 'Score: ' + (score >= 0 ? score : 0);
+        }
+    </script>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            startGame();
+            updateScoreDisplay();
+            setTimeout(function() {
+            startCountdown();
+        }, 3000);
+        });
+    </script>
+    <h2>Welcome to the Game, {{ name }}!</h2>
+    <div id="score" class="score" >Score:</div>
+    <form id="score-form" action="{{ url_for('end') }}" method="post" style="display: none;">
+        <input type="hidden" name="score" id="score-input" value="">
+    </form>
+    <h1 id="countdown"  class= "countdown"></h1>
+    <h1 id="game-countdown" class="game-countdown"></h1>
+    <a href="{{ url_for('index') }}" class="logout-link">Logout</a>
+    <img id="CR7" class="CR7" src="{{ url_for('static', filename='image/CR7head1.png') }}" alt="C. Ronaldo" onclick="showCristiano()" style="position: absolute; visibility: visible;">
+    <audio id="siuuu" src="/static/auido/siuuu.mp3"></audio>
+</body>
+</html>
+

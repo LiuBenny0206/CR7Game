@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CR7Game</title>
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            text-align: center;
+            background-color: black;
+            color : black;
+            background-image:url('static/image/IndexBackground.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .input-container {
+          --c-text: rgb(50, 50, 80);
+          --c-bg: rgb(252, 252, 252);
+          --c-outline: rgb(139, 0, 0);
+          display: grid;
+          gap: 1ch;
+          position: relative;
+          max-width: 190px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          color: black;
+
+        }
+
+        .input-field {
+          padding: 0.5em 0.75em;
+          border-radius: 0.2em;
+          border: 1px solid var(--c-border, currentColor);
+          color: var(--c-text);
+          font-size: 1rem;
+          letter-spacing: 0.1ch;
+          margin-left: -92px;
+          margin-top: -10px;
+          width: 225%;
+          height: 60px;
+        }
+
+        .input-field:not(:placeholder-shown) + .input-label {
+          transform: translateY(-220%);
+          opacity: 1;
+        }
+
+        .input-field:invalid {
+          --c-border: rgb(230, 85, 60);
+          --c-text: rgb(230, 85, 60);
+          --c-outline: rgb(230, 85, 60);
+        }
+
+        .input-field:is(:disabled, :read-only) {
+          --c-border: rgb(150, 150, 150);
+          --c-text: rgb(170, 170, 170);
+        }
+
+        .input-field:is(:focus, :focus-visible) {
+          outline: 2px solid var(--c-outline);
+          outline-offset: 2px;
+        }
+
+        .input-label {
+          --timing: 200ms ease-in;
+          position: absolute;
+          right: 60%;
+          top: 50%;
+          transition: transform var(--timing),
+            opacity var(--timing);
+          transform: translateY(-50%);
+          opacity: 0;
+          color: var(--c-text);
+          font-weight: 500;
+        }
+        .input-field::placeholder {
+            text-align: center; /* 置中 */
+        }
+        .button {
+         --color: #000000;
+         padding: 0.8em 1.7em;
+         background-color: transparent;
+         border-radius: .3em;
+         position: relative;
+         overflow: hidden;
+         cursor: pointer;
+         transition: .5s;
+         font-weight: bold;
+         font-size: 17px;
+         border: 1px solid;
+         font-family: "Helvetica", sans-serif;
+         text-transform: uppercase;
+         color: var(--color);
+         z-index: 1;
+         margin-top: 30px;
+            width: 100px;
+         height: 50px;
+        }
+
+        .button::before, .button::after {
+         content: '';
+         display: block;
+         width: 100px;
+         height: 100px;
+         transform: translate(-50%, -50%);
+         position: absolute;
+         border-radius: 50%;
+         z-index: -1;
+         background-color: firebrick;
+         transition: 1s ease;
+        }
+
+        .button::before {
+         top: -1em;
+         left: -1em;
+        }
+
+        .button::after {
+         left: calc(100% + 1em);
+         top: calc(100% + 1em);
+        }
+
+        .button:hover::before, .button:hover::after {
+         height: 410px;
+         width: 410px;
+        }
+
+        .button:hover {
+         color: rgb(10, 25, 30);
+        }
+
+        .button:active {
+         filter: brightness(.8);
+        }
+        .info-container {
+            background-color: white;
+            width: 380px;
+            height: 300px;
+            margin: 120px;
+            border-radius: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .header h1 {
+            position: relative;
+            left: 190px;
+            transform: translateX(-50%);
+            font-size: 35px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-container">
+        <div class="header">
+            <h1>Cristiano Ronaldo Game</h1>
+        </div>
+        <form action="game.html" method="post">
+            <p class="input-container">
+            <input type="text" placeholder="Enter your name" name="name" id="name" class="input-field" autocomplete="name">
+            <label class="input-label" for="text">Siuuuuuuuuuuuuu</label>
+            </p>
+            <button class="button"> Play </button>
+        </form>
+    </div>
+</body>
+</html>
